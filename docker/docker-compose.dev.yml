@@ -1,5 +1,15 @@
 version: "3.9"
 services:
+  web:
+    env_file:
+      # Not sure if this will work...
+      - ./config/.dev.env
+    build: .
+    entrypoint: [ "python", "manage.py", "runserver" ]
+    volumes:
+      - .:/{{cookiecutter.project_slug}}
+    ports:
+      - "8000:8000"
   nginx:
     image: nginx:1.23-alpine
     restart: unless-stopped
