@@ -1,3 +1,6 @@
 # My Cookie Cutter
 
 Starting place for a stack which includes Docker, NGINX, FastAPI/Django, and more...
+
+# Requirements
+...
