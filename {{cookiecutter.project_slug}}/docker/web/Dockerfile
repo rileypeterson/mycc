@@ -1,1 +1,14 @@
-# TODO
+# syntax=docker/dockerfile:1
+FROM python:3.10-alpine
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+WORKDIR /{{cookiecutter.project_slug}}
+COPY requirements.txt .
+RUN \
+ apk update && \
+ apk upgrade && \
+ apk add postgresql-libs && \
+ apk add --virtual .build-deps gcc musl-dev postgresql-dev && \
+ python3 -m pip install -r requirements.txt && \
+ apk add --no-cache bash && \
+ apk --purge del .build-deps

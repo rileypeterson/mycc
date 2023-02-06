@@ -3,11 +3,11 @@ services:
   web:
     env_file:
       # Not sure if this will work...
-      - ./config/.dev.env
-    build: .
-    entrypoint: [ "python", "manage.py", "runserver" ]
+      - ../config/.dev.env
+    build: ./web/
+    entrypoint: [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
     volumes:
-      - .:/{{cookiecutter.project_slug}}
+      - ../{{cookiecutter.project_slug}}:/{{cookiecutter.project_slug}}
     ports:
       - "8000:8000"
   nginx:

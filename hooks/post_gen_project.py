@@ -1,8 +1,4 @@
-import time
-import os
-import subprocess
+import secrets
 
-folder = "{{ cookiecutter.project_slug }}"
-
-with open("/Users/riley/Documents/foo.txt", "w") as f:
-    f.write(os.getcwd())
+with open("config/.dev.env", "w") as f:
+    f.write(f"SECRET_KEY={secrets.token_urlsafe(128)}\n")
