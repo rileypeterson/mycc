@@ -13,3 +13,5 @@ services:
   nginx:
     image: nginx:1.23-alpine
     restart: unless-stopped
+    volumes:
+      - ../nginx:/etc/nginx
