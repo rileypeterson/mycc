@@ -16,7 +16,7 @@ services:
       # Not sure if this will work...
       - ../config/.dev.env
     build: ./web/
-    entrypoint: [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+    entrypoint: ["sh", "scripts/dev.entrypoint.sh"]
     volumes:
       - ../{{cookiecutter.project_slug}}:/{{cookiecutter.project_slug}}
     ports:
@@ -25,6 +25,6 @@ services:
     image: nginx:1.23-alpine
     restart: unless-stopped
     volumes:
-      - ../nginx:/etc/nginx
+      - ../{{cookiecutter.project_slug}}/nginx/ddns:/etc/nginx/ddns
 volumes:
   pgdata:
