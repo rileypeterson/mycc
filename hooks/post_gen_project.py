@@ -15,7 +15,7 @@ with open("config/.dev.env", "w") as f:
     f.write(f"SECRET_KEY={secrets.token_urlsafe(128)}\n")
     f.write(f"DEBUG=1\n")
 
-path = "{{cookiecutter.project_slug}}/{{cookiecutter.project_slug}}/pages/templates/pages/*.html"
+path = "{{cookiecutter.project_slug}}/pages/templates/pages/*.html"
 html_files = glob.glob(path)
 # Hash for project_name
 hash = "B29219FED19467B13C"

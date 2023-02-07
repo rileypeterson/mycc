@@ -9,8 +9,8 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - ENV=dev
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+#    volumes:
+#      - pgdata:/var/lib/postgresql/data
   web:
     env_file:
       # Not sure if this will work...
@@ -26,5 +26,5 @@ services:
     restart: unless-stopped
     volumes:
       - ../{{cookiecutter.project_slug}}/nginx/ddns:/etc/nginx/ddns
-volumes:
-  pgdata:
+#volumes:
+#  pgdata:
