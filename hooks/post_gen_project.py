@@ -15,6 +15,7 @@ with open("config/.dev.env", "w") as f:
     f.write(f"SECRET_KEY={secrets.token_urlsafe(128)}\n")
     f.write(f"DEBUG=1\n")
 
+# It's probably better to just add a note to do this manually after generation...
 path = "{{cookiecutter.project_slug}}/pages/templates/pages/*.html"
 html_files = glob.glob(path)
 # Hash for project_name
