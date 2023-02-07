@@ -1,5 +1,6 @@
 {
   "project_name": "My Project",
   "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
-  "domain_name": "example_domain.com"
+  "domain_name": "your.fancydns.com",
+  "host_ip": "123.456.789.101"
 }

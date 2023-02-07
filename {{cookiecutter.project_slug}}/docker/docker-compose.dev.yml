@@ -1,5 +1,16 @@
 version: "3.9"
 services:
+  db:
+    env_file:
+      - ../config/.dev.env
+    image: postgres
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - ENV=dev
+    volumes:
+      - pgdata:/var/lib/postgresql/data
   web:
     env_file:
       # Not sure if this will work...
@@ -15,3 +26,5 @@ services:
     restart: unless-stopped
     volumes:
       - ../nginx:/etc/nginx
+volumes:
+  pgdata:
