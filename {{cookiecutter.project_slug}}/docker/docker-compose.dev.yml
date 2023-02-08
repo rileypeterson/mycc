@@ -16,7 +16,7 @@ services:
       # Not sure if this will work...
       - ../config/.dev.env
     build: ./web/
-    entrypoint: ["sh", "scripts/dev.entrypoint.sh"]
+    entrypoint: ["sh", "/web/scripts/dev.entrypoint.sh"]
     volumes:
       - ../{{cookiecutter.project_slug}}:/{{cookiecutter.project_slug}}
     ports:
