@@ -2,8 +2,10 @@
 FROM python:3.10-alpine
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-WORKDIR /{{cookiecutter.project_slug}}
-COPY requirements.txt .
+WORKDIR /web
+# Copies in requirements.txt, scripts, and Dockerfile into /web
+# Then once all installed, switch to project directory
+COPY . .
 RUN \
  apk update && \
  apk upgrade && \
@@ -12,3 +14,4 @@ RUN \
  python3 -m pip install -r requirements.txt && \
  apk add --no-cache bash && \
  apk --purge del .build-deps
+WORKDIR /{{cookiecutter.project_slug}}
