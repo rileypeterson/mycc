@@ -18,11 +18,9 @@ with open("config/.dev.env", "w") as f:
 # It's probably better to just add a note to do this manually after generation...
 path = "{{cookiecutter.project_slug}}/pages/templates/pages/*.html"
 html_files = glob.glob(path)
-# Hash for project_name
-hash = "B29219FED19467B13C"
-
+key = "[[[[cookiecutter.project_name]]]]"
 for file in html_files:
     with open(file) as f:
-        t = f.read().replace(hash, "{{cookiecutter.project_name}}")
+        t = f.read().replace(key, "{{cookiecutter.project_name}}")
     with open(file, "w") as f:
         f.write(t)
