@@ -1,0 +1,71 @@
+version: "3.9"
+services:
+  db:
+    env_file:
+      - ../config/.prod.env
+    image: postgres
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - ENV=prod
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  web:
+    env_file:
+      - ../config/.prod.env
+    build: ./web/
+    entrypoint: ["sh", "/web/scripts/prod.entrypoint.sh"]
+    volumes:
+      - ../{{cookiecutter.project_slug}}:/{{cookiecutter.project_slug}}
+    expose:
+      - 8000
+    environment:
+      - POSTGRES_NAME=${POSTGRES_NAME}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - ENV=prod
+    depends_on:
+      - db
+  nginx:
+    build:
+      context: ../nginx/
+      dockerfile: ../docker/nginx/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./static:/{{cookiecutter.project_slug}}/static
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+      - ./data/nginx/ddns:/etc/nginx/ddns
+    ports:
+      - 80:80
+      - 443:443
+    command: "sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+  certbot:
+    image: certbot/certbot:arm64v8-latest
+    restart: unless-stopped
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    depends_on:
+      - nginx
+#  ofelia-ddns:
+#    image: mcuadros/ofelia:latest
+#    depends_on:
+#      - nginx
+#      - tasks
+#    restart: unless-stopped
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock:ro
+#      - ./tasks/ofelia-ddns-config.ini:/etc/ofelia/config.ini
+#  tasks:
+#    build: ./tasks
+#    tty: true
+#    volumes:
+#      - ./data/nginx/ddns:/tasks/ddns
+#      - ./tasks:/tasks
+#    labels:
+#      ofelia.enabled: "true"
+volumes:
+  pgdata:
