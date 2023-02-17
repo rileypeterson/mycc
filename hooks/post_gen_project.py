@@ -10,8 +10,6 @@ with open("config/.dev.env", "w") as f:
     f.write(f"POSTGRES_PASSWORD={secrets.token_urlsafe(32)}\n")
 
     # Django
-    f.write("HOST_IP={{cookiecutter.host_ip}}\n")
-    f.write(f"DDNS_IP={{cookiecutter.domain_name}}\n")
     f.write(f"SECRET_KEY={secrets.token_urlsafe(128)}\n")
     f.write(f"DEBUG=1\n")
 
@@ -25,8 +23,6 @@ with open("config/.prod.env", "w") as f:
     f.write(f"POSTGRES_PASSWORD={secrets.token_urlsafe(32)}\n")
 
     # Django
-    f.write("HOST_IP={{cookiecutter.host_ip}}\n")
-    f.write(f"DDNS_IP={{cookiecutter.domain_name}}\n")
     f.write(f"SECRET_KEY={secrets.token_urlsafe(128)}\n")
     f.write(f"DEBUG=0\n")
 

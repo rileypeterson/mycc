@@ -9,11 +9,10 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - ENV=dev
-#    volumes:
-#      - pgdata:/var/lib/postgresql/data
+    volumes:
+      - {{cookiecutter.project_slug}}_pgdata:/var/lib/postgresql/data
   web:
     env_file:
-      # Not sure if this will work...
       - ../config/.dev.env
     build: ./web/
     entrypoint: ["sh", "/web/scripts/dev.entrypoint.sh"]
@@ -21,5 +20,13 @@ services:
       - ../{{cookiecutter.project_slug}}:/{{cookiecutter.project_slug}}
     ports:
       - "8000:8000"
-#volumes:
-#  pgdata:
+    environment:
+      - POSTGRES_NAME=${POSTGRES_NAME}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - ENV=dev
+    depends_on:
+      - db
+
+volumes:
+  {{cookiecutter.project_slug}}_pgdata:

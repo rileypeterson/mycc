@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - ENV=prod
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - {{cookiecutter.project_slug}}_pgdata:/var/lib/postgresql/data
   web:
     env_file:
       - ../config/.prod.env
@@ -34,9 +34,9 @@ services:
     restart: unless-stopped
     volumes:
       - ./static:/{{cookiecutter.project_slug}}/static
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
-      - ./data/nginx/ddns:/etc/nginx/ddns
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+      - ../nginx/ddns:/etc/nginx/ddns
     ports:
       - 80:80
       - 443:443
@@ -45,27 +45,11 @@ services:
     image: certbot/certbot:arm64v8-latest
     restart: unless-stopped
     volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     depends_on:
       - nginx
-#  ofelia-ddns:
-#    image: mcuadros/ofelia:latest
-#    depends_on:
-#      - nginx
-#      - tasks
-#    restart: unless-stopped
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock:ro
-#      - ./tasks/ofelia-ddns-config.ini:/etc/ofelia/config.ini
-#  tasks:
-#    build: ./tasks
-#    tty: true
-#    volumes:
-#      - ./data/nginx/ddns:/tasks/ddns
-#      - ./tasks:/tasks
-#    labels:
-#      ofelia.enabled: "true"
+
 volumes:
-  pgdata:
+  {{cookiecutter.project_slug}}_pgdata:

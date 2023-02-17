@@ -2,8 +2,14 @@
 
 Starting place for a stack which includes Docker, NGINX, Django/FastAPI, and more...
 
+# Future Thoughts
+* Separate branches for different setups (e.g. Just db/django, just nginx, just traefik, just elasticache, etc.)
+  * `cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git --checkout develop`
+* Maybe use Traefik: https://www.reddit.com/r/Traefik/comments/hpsrx9/is_it_possible_to_configure_whitelist_for/
+* Look through [cookiecutter django](https://github.com/cookiecutter/cookiecutter-django)
+
 # Requirements
-...
+* Docker
 
 # Favicon generator
 https://favicon.io/
