@@ -54,13 +54,15 @@ services:
     build:
       context: ../tasks/
       dockerfile: ../docker/tasks/Dockerfile
-    tty: true
     volumes:
       - ../nginx/ddns:/tasks/ddns
       - ../tasks:/tasks
     labels:
       ofelia.enabled: "true"
-    command: "python /tasks/getddns.py"
+    # Run task on start up and then leave container open
+    command: >
+      sh -c "python /tasks/getddns.py &&
+             tail -f /dev/null"
   ofelia-ddns:
     image: mcuadros/ofelia:latest
     depends_on:
