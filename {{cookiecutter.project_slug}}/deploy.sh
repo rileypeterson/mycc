@@ -39,7 +39,7 @@ echo
 echo "### Stopping and Starting containers ..."
 prod-down
 prod-up-detach
-sleep 30
+sleep 90
 
 echo "### Deleting dummy certificate for $domains ..."
 docker compose --env-file ./config/.prod.env -f docker/docker-compose.prod.yml run --rm --entrypoint "\
