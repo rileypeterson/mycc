@@ -36,7 +36,8 @@ docker compose --env-file ./config/.prod.env -f docker/docker-compose.prod.yml r
     -subj '/CN=localhost'" certbot
 echo
 
-echo "### Starting containers ..."
+echo "### Stopping and Starting containers ..."
+prod-down
 prod-up-detach
 sleep 30
 
@@ -78,7 +79,8 @@ docker compose --env-file ./config/.prod.env -f docker/docker-compose.prod.yml r
     --force-renewal" certbot
 echo
 
-#echo "### Re-deploying ..."
-#sudo chown -R {{ cookiecutter.linux_user }}:{{ cookiecutter.linux_user }} docker/certbot
-#prod-down
-#prod-up-detach
+echo "### Changing certbot file permissions"
+sudo chown -R $USER:$USER docker/certbot
+
+echo "### Reloading NGINX ..."
+nginx-reload
