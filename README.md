@@ -51,4 +51,6 @@ https://favicon.io/
 prod-down
 docker volume rm $(docker volume ls -q)
 docker system prune -a --volumes
+rm -rf <project_slug>
+rm -rf .cookiecutter*
 ```
