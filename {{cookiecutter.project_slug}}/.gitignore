@@ -141,3 +141,5 @@ dmypy.json
 **/certbot
 
 **/nginx/ddns/allowed_ips.conf
+
+/static/

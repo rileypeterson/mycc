@@ -18,6 +18,7 @@ services:
     entrypoint: ["sh", "/web/scripts/prod.entrypoint.sh"]
     volumes:
       - ../{{cookiecutter.project_slug}}:/{{cookiecutter.project_slug}}
+      - ../static:/static
     expose:
       - 8000
     environment:
@@ -33,7 +34,7 @@ services:
       dockerfile: ../docker/nginx/Dockerfile
     restart: unless-stopped
     volumes:
-      - ./static:/{{cookiecutter.project_slug}}/static
+      - ../static:/{{cookiecutter.project_slug}}/static
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
       - ../nginx/ddns:/etc/nginx/ddns
