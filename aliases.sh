@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# For testing this cookiecutter
 alias remake='(
 mv ~/Documents/my_project/config/.dev.env /tmp &&
 mv ~/Documents/my_project/config/.prod.env /tmp &&

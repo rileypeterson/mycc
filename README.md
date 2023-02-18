@@ -9,13 +9,6 @@ cookiecutter https://github.com/rileypeterson/mycc.git
 # Enter in Parameters
 cd <project_slug>
 source aliases.sh
-# Not working right now
-# What I've been needing to do is run with staging=1
-# deploy
-# prod-down
-# rm -rf docker/certbot
-# change back to staging=0
-# deploy (successfully)
 deploy
 ```
 
@@ -53,7 +46,7 @@ https://favicon.io/
 * It'll be rendered by the `post_gen_project.py` hook
 * For now only `cookiecutter.project_name` will be recognized, but it would be straight forward to add more.
 
-# Docker removal (careful)
+#### Docker removal (caution, this is just for testing)
 ```commandline
 prod-down
 docker volume rm $(docker volume ls -q)
