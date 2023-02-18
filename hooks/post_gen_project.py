@@ -1,5 +1,8 @@
 import secrets
 import glob
+import os
+
+os.makedirs("config", exist_ok=True)
 
 # Dev Config
 with open("config/.dev.env", "w") as f:
