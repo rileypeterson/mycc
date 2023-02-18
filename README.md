@@ -9,6 +9,7 @@ cookiecutter https://github.com/rileypeterson/mycc.git
 # Enter in Parameters
 cd <project_slug>
 source aliases.sh
+# Not working right now
 deploy
 ```
 
