@@ -49,6 +49,26 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  tasks:
+    container_name: tasks-container
+    build:
+      context: ../tasks/
+      dockerfile: ../docker/tasks/Dockerfile
+    tty: true
+    volumes:
+      - ../nginx/ddns:/tasks/ddns
+      - ../tasks:/tasks
+    labels:
+      ofelia.enabled: "true"
+  ofelia-ddns:
+    image: mcuadros/ofelia:latest
+    depends_on:
+      - nginx
+      - tasks
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ../tasks/ofelia-ddns-config.ini:/etc/ofelia/config.ini
 
 volumes:
   {{cookiecutter.project_slug}}_pgdata:
