@@ -38,7 +38,7 @@ echo
 
 echo "### Starting containers ..."
 prod-up-detach
-sleep 90
+sleep 30
 
 echo "### Deleting dummy certificate for $domains ..."
 docker compose --env-file ./config/.prod.env -f docker/docker-compose.prod.yml run --rm --entrypoint "\
@@ -61,7 +61,11 @@ case "$email" in
 esac
 
 # Enable staging mode if needed
-if [ $staging != "0" ]; then staging_arg="--staging"; fi
+# Spent like 6 hours trying to figure out why staging was still happening and it was
+# because there wasn't this else statement in the original script
+# https://github.com/wmnnd/nginx-certbot/blob/master/init-letsencrypt.sh
+# Finally, I think I can get this working consistently...
+if [ $staging != "0" ]; then staging_arg="--staging"; else staging_arg=""; fi
 
 docker compose --env-file ./config/.prod.env -f docker/docker-compose.prod.yml run --rm --entrypoint "\
   certbot certonly --webroot -w /var/www/certbot \
