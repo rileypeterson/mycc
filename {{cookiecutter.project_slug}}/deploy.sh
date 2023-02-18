@@ -38,6 +38,7 @@ echo
 
 echo "### Starting containers ..."
 prod-up-detach
+sleep 30
 
 echo "### Deleting dummy certificate for $domains ..."
 docker compose --env-file ./config/.prod.env -f docker/docker-compose.prod.yml run --rm --entrypoint "\

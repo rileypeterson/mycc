@@ -10,6 +10,11 @@ cookiecutter https://github.com/rileypeterson/mycc.git
 cd <project_slug>
 source aliases.sh
 # Not working right now
+# What I've been needing to do is run with staging=1
+# deploy
+# rm -rf docker/certbot
+# change back to staging=0
+# deploy (successfully)
 deploy
 ```
 
