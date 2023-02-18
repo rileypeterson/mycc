@@ -2,6 +2,16 @@
 
 Starting place for a stack which includes Docker, NGINX, Django/FastAPI, and more...
 
+# Usage
+For main branch (otherwise tack on: `--checkout <branch_name>`):
+```commandline
+cookiecutter https://github.com/rileypeterson/mycc.git
+# Enter in Parameters
+cd <project_slug>
+source aliases.sh
+deploy
+```
+
 # Future Thoughts
 * Separate branches for different setups (e.g. Just db/django, just nginx, just traefik, just elasticache, etc.)
   * `cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git --checkout develop`
