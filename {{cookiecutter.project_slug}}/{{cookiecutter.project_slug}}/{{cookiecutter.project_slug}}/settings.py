@@ -39,9 +39,8 @@ DEBUG = bool(int(os.environ.get("DEBUG")))
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    os.environ.get("HOST_IP"),
     # Allow subdomain
-    "." + os.environ.get("DDNS_IP"),
+    ".{{cookiecutter.domain_name}}",
 ]
 
 

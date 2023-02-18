@@ -137,3 +137,7 @@ dmypy.json
 
 # Mac OS
 *.DS_Store
+
+**/certbot
+
+**/nginx/ddns/allowed_ips.conf

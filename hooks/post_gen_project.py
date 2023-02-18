@@ -1,7 +1,10 @@
 import secrets
 import glob
+import os
 
+os.makedirs("config", exist_ok=True)
 
+# Dev Config
 with open("config/.dev.env", "w") as f:
     # Database
     f.write(f"POSTGRES_DB=dev\n")
@@ -10,10 +13,21 @@ with open("config/.dev.env", "w") as f:
     f.write(f"POSTGRES_PASSWORD={secrets.token_urlsafe(32)}\n")
 
     # Django
-    f.write("HOST_IP={{cookiecutter.host_ip}}\n")
-    f.write(f"DDNS_IP={{cookiecutter.domain_name}}\n")
     f.write(f"SECRET_KEY={secrets.token_urlsafe(128)}\n")
     f.write(f"DEBUG=1\n")
+
+
+# Prod Config
+with open("config/.prod.env", "w") as f:
+    # Database
+    f.write(f"POSTGRES_DB=prod\n")
+    f.write(f"POSTGRES_USER=prod\n")
+    f.write(f"POSTGRES_NAME=prod\n")
+    f.write(f"POSTGRES_PASSWORD={secrets.token_urlsafe(32)}\n")
+
+    # Django
+    f.write(f"SECRET_KEY={secrets.token_urlsafe(128)}\n")
+    f.write(f"DEBUG=0\n")
 
 # It's probably better to just add a note to do this manually after generation...
 path = "{{cookiecutter.project_slug}}/pages/templates/pages/*.html"

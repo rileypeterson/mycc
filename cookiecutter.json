@@ -1,8 +1,8 @@
 {
   "project_name": "My Project",
-  "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
-  "domain_name": "your.fancydns.com",
-  "host_ip": "123.456.789.101",
+  "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '_')|replace('-', '_')|replace('.', '_')|trim() }}",
+  "domain_name": "my_project.com",
+  "email": "your_email_here@email.com",
   "_copy_without_render": [
     "{{cookiecutter.project_slug}}/pages/templates/pages/*.html"
   ]
