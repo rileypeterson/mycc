@@ -60,6 +60,7 @@ services:
       - ../tasks:/tasks
     labels:
       ofelia.enabled: "true"
+    command: "python /tasks/getddns.py"
   ofelia-ddns:
     image: mcuadros/ofelia:latest
     depends_on:

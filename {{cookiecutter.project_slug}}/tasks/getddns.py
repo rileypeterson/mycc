@@ -3,6 +3,8 @@ import ipaddress
 import os
 import datetime
 
+print("RUNNING GETDDNS")
+
 if os.getcwd().startswith("/tasks"):
     # In tasks container
     prefix = "/tasks"
