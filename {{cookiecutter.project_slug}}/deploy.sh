@@ -8,7 +8,7 @@ domains=({{cookiecutter.domain_name}})
 rsa_key_size=4096
 data_path="./docker/certbot"
 email={{cookiecutter.email}}
-staging=1 # Set to 1 if you're testing your setup to avoid hitting request limits
+staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
 if [ -d "$data_path/conf/live/" ]; then
   echo "### Certbot directories already exist. Re-deploying ..."
