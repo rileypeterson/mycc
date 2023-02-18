@@ -54,3 +54,15 @@ docker system prune -a --volumes
 rm -rf <project_slug>
 rm -rf .cookiecutter*
 ```
+
+#### Note
+You can have an NGINX config which blocks IPs like this:
+```commandline
+    location / {
+        proxy_pass         http://django;
+        include ddns/allowed_ips.conf;
+        deny all;
+    }
+```
+and the certbot ssl exchange will still work. Thus, you don't need to
+leave the root domain exposed to 80/443.
